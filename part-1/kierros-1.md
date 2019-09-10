@@ -66,3 +66,19 @@ FROM devopsdockeruh/overwrite_cmd_exercise
 
 CMD ["--clock"]
 ```
+
+## 1.7
+Commands:
+```
+docker build -t curler -f Dockerfile-1-7 .
+docker run -it curler
+```
+
+Dockerfile:
+```
+FROM ubuntu
+
+RUN apt-get update && apt-get --assume-yes install curl
+
+CMD echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;
+```
