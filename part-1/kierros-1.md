@@ -229,3 +229,16 @@ EXPOSE 3000
 
 ENTRYPOINT RAILS_LOG_TO_STDOUT=true rails s
 ```
+
+## 1.15
+
+SKIPPED
+
+## 1.16
+
+Heroku url:
+```
+https://heroku-test-docker-rl.herokuapp.com/
+```
+
+## 1.17
