@@ -108,3 +108,28 @@ EXPOSE 5000
 
 ENTRYPOINT ["npm", "start"]
 ```
+
+## 1.11
+Dockerfile:
+```
+FROM node:10.16.3-alpine
+
+WORKDIR /usr/app
+
+COPY . .
+
+RUN npm install
+
+EXPOSE 8000
+
+ENTRYPOINT ["npm", "start"]
+
+```
+
+Commands:
+```
+docker build -t 1-11 -f Dockerfile-1-11 .
+
+docker run --mount type=bind,source="$(pwd)"/logs.txt,target=/usr/app/logs.txt -p 8000:8000 1-11
+
+```
