@@ -92,3 +92,19 @@ docker run --mount type=bind,source="$(pwd)"/logs.txt,target=/usr/app/logs.txt d
 ```
 docker run -p 1337:80 devopsdockeruh/ports_exercise
 ```
+
+## 1.10
+Dockerfile:
+```
+FROM node:10.16.3-alpine
+
+WORKDIR /usr/app
+
+COPY . .
+
+RUN npm install
+
+EXPOSE 5000
+
+ENTRYPOINT ["npm", "start"]
+```
