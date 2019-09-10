@@ -1,0 +1,11 @@
+FROM ubuntu:cosmic
+
+RUN apt-get update
+
+RUN apt-get install --assume-yes git curl
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+
+RUN apt-get install -y nodejs
+
+RUN npm install -g yarn

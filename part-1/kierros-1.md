@@ -242,3 +242,19 @@ https://heroku-test-docker-rl.herokuapp.com/
 ```
 
 ## 1.17
+Dockerfile:
+```
+FROM ubuntu:cosmic
+
+RUN apt-get update
+
+RUN apt-get install --assume-yes git curl
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+
+RUN apt-get install -y nodejs
+
+RUN npm install -g yarn
+```
+Base of the image is Ubuntu Cosmic, because it is good for general development work. Installs a development environment for Node applications. Yarn is added as a faster alternative for default node package manager (NPM) and git is needed for version control. This could be a typical environment for frontend development for
+example.
