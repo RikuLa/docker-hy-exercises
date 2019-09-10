@@ -82,3 +82,8 @@ RUN apt-get update && apt-get --assume-yes install curl
 
 CMD echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;
 ```
+
+## 1.8
+```
+docker run --mount type=bind,source="$(pwd)"/logs.txt,target=/usr/app/logs.txt devopsdockeruh/first_volume_exercise
+```
