@@ -180,3 +180,25 @@ ENV API_URL http://localhost:8000
 
 ENTRYPOINT API_URL=$API_URL npm start
 ```
+
+## 1.13
+Commands:
+```
+docker build -t java-spring -f ../docker-hy-exercises/part-1/Dockerfile-1-13 .
+docker run -p 8080:8080 java-spring
+```
+
+Dockerfile:
+```
+FROM openjdk:12-alpine
+
+WORKDIR /usr/app
+
+COPY . .
+
+RUN ./mvnw package
+
+EXPOSE 8080
+
+ENTRYPOINT java -jar ./target/docker-example-1.1.3.jar
+```
