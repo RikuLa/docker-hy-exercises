@@ -202,3 +202,30 @@ EXPOSE 8080
 
 ENTRYPOINT java -jar ./target/docker-example-1.1.3.jar
 ```
+
+## 1.14
+Commands:
+```
+docker build -t rails -f ../docker-hy-exercises/part-1/Dockerfile-1-14 .
+docker run -p 3000:3000 rails
+```
+
+Dockerfile:
+```
+FROM ruby:2.6.0
+
+RUN apt-get update
+RUN apt-get install --assume-yes nodejs
+
+WORKDIR /usr/app
+
+COPY . .
+
+RUN bundle install
+
+RUN rails db:migrate
+
+EXPOSE 3000
+
+ENTRYPOINT RAILS_LOG_TO_STDOUT=true rails s
+```

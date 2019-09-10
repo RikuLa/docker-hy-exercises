@@ -1,0 +1,16 @@
+FROM ruby:2.6.0
+
+RUN apt-get update
+RUN apt-get install --assume-yes nodejs
+
+WORKDIR /usr/app
+
+COPY . .
+
+RUN bundle install
+
+RUN rails db:migrate
+
+EXPOSE 3000
+
+ENTRYPOINT RAILS_LOG_TO_STDOUT=true rails s
