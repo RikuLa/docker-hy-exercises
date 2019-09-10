@@ -12,3 +12,14 @@ services:
         source: ./logs.txt
         target: /usr/app/logs.txt
 ```
+
+## 2.2
+Docker-compose:
+```
+version: '3.7'
+services:
+  ports:
+    image: devopsdockeruh/ports_exercise
+    ports:
+    - "80:80"
+```
