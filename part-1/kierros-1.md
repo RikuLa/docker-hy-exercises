@@ -133,3 +133,50 @@ docker build -t 1-11 -f Dockerfile-1-11 .
 docker run --mount type=bind,source="$(pwd)"/logs.txt,target=/usr/app/logs.txt -p 8000:8000 1-11
 
 ```
+
+## 1.12
+
+### Backend:
+#### Commands:
+```
+docker build -t be -f Dockerfile-1-12-be .
+docker run -p 8000:8000 be
+```
+#### Dockerfile:
+```
+FROM node:10.16.3-alpine
+
+WORKDIR /usr/app
+
+COPY . .
+
+RUN npm install
+
+EXPOSE 8000
+
+ENV FRONT_URL http://localhost:5000
+
+ENTRYPOINT FRONT_URL=$FRONT_URL npm start
+```
+### Frontend:
+#### Commands:
+```
+docker build -t fe -f Dockerfile-1-12-fe .
+docker run -p 5000:5000 fe
+```
+#### Dockerfile:
+```
+FROM node:10.16.3-alpine
+
+WORKDIR /usr/app
+
+COPY . .
+
+RUN npm install
+
+EXPOSE 5000
+
+ENV API_URL http://localhost:8000
+
+ENTRYPOINT API_URL=$API_URL npm start
+```
