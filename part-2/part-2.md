@@ -134,3 +134,38 @@ services:
       dockerfile: ./Dockerfile-1-12-fe
 
 ```
+
+## 2.8
+Docker-compose:
+```
+version: '3.7'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/nginx.conf
+  postgres:
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=riku
+      - POSTGRES_PASSWORD=hunter3
+  backend:
+    build:
+      context: ./backend-example-docker/
+      dockerfile: ./Dockerfile-1-12-be
+    environment:
+      - REDIS=redis
+      - DB_USERNAME=riku
+      - DB_PASSWORD=hunter3
+      - DB_HOST=postgres
+  redis:
+    image: redis:latest
+  frontend:
+    build:
+      context: ./frontend-example-docker/
+      dockerfile: ./Dockerfile-1-12-fe
+```
