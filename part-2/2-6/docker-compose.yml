@@ -14,9 +14,13 @@ services:
       - DB_USERNAME=riku
       - DB_PASSWORD=hunter3
       - DB_HOST=postgres
+    ports:
+      - "8000:8000"
   redis:
     image: redis:latest
   frontend:
     build:
       context: ./frontend-example-docker/
       dockerfile: ./Dockerfile-1-12-fe
+    ports:
+      - "5000:5000"
