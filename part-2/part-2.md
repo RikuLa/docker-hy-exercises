@@ -211,3 +211,73 @@ services:
     ports:
       - "5000:5000"
 ```
+
+## 2.10
+
+Docker-compose:
+```
+version: '3.7'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/nginx.conf
+  postgres:
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=riku
+      - POSTGRES_PASSWORD=hunter3
+  backend:
+    build:
+      context: ./backend-example-docker/
+      dockerfile: ./Dockerfile-2-10-be
+    environment:
+      - REDIS=redis
+      - DB_USERNAME=riku
+      - DB_PASSWORD=hunter3
+      - DB_HOST=postgres
+  redis:
+    image: redis:latest
+  frontend:
+    build:
+      context: ./frontend-example-docker/
+      dockerfile: ./Dockerfile-2-10-fe
+```
+
+Backend Dockerfile:
+```
+FROM node:10.16.3-alpine
+
+WORKDIR /usr/app
+
+COPY . .
+
+RUN npm install
+
+EXPOSE 8000
+
+ENV FRONT_URL http://localhost
+
+ENTRYPOINT FRONT_URL=$FRONT_URL npm start
+```
+
+Frontend Dockerfile:
+```
+FROM node:10.16.3-alpine
+
+WORKDIR /usr/app
+
+COPY . .
+
+RUN npm install
+
+EXPOSE 5000
+
+ENV API_URL http://localhost/api/
+
+ENTRYPOINT API_URL=$API_URL npm start
+```
