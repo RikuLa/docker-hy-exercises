@@ -174,3 +174,40 @@ services:
       context: ./frontend-example-docker/
       dockerfile: ./Dockerfile-1-12-fe
 ```
+
+## 2.9
+Docker-compose:
+```
+version: '3.7'
+services:
+  postgres:
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=riku
+      - POSTGRES_PASSWORD=hunter3
+    volumes:
+      - type: bind
+        source: ./database
+        target: /var/lib/postgresql/data
+  backend:
+    build:
+      context: ./backend-example-docker/
+      dockerfile: ./Dockerfile-1-12-be
+    environment:
+      - REDIS=redis
+      - DB_USERNAME=riku
+      - DB_PASSWORD=hunter3
+      - DB_HOST=postgres
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+  redis:
+    image: redis:latest
+  frontend:
+    build:
+      context: ./frontend-example-docker/
+      dockerfile: ./Dockerfile-1-12-fe
+    ports:
+      - "5000:5000"
+```
