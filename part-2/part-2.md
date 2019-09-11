@@ -106,3 +106,31 @@ services:
     ports:
       - "5000:5000"
 ```
+
+## 2.6
+Docker-compose:
+```
+version: '3.7'
+services:
+  postgres:
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=riku
+      - POSTGRES_PASSWORD=hunter3
+  backend:
+    build:
+      context: ./backend-example-docker/
+      dockerfile: ./Dockerfile-1-12-be
+    environment:
+      - REDIS=redis
+      - DB_USERNAME=riku
+      - DB_PASSWORD=hunter3
+      - DB_HOST=postgres
+  redis:
+    image: redis:latest
+  frontend:
+    build:
+      context: ./frontend-example-docker/
+      dockerfile: ./Dockerfile-1-12-fe
+
+```
