@@ -136,9 +136,13 @@ services:
       dockerfile: ./Dockerfile-1-12-fe
     ports:
       - "5000:5000"
-
-
 ```
+
+
+## 2.7
+
+SKIPPED
+
 
 ## 2.8
 Docker-compose:
