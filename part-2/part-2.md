@@ -83,3 +83,26 @@ services:
         - 80:80
       container_name: load-balancer
 ```
+
+## 2.5
+Docker-compose:
+```
+version: '3.7'
+services:
+  backend:
+    build:
+      context: ./backend-example-docker/
+      dockerfile: ./Dockerfile-1-12-be
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS=redis
+  redis:
+    image: redis:latest
+  frontend:
+    build:
+      context: ./frontend-example-docker/
+      dockerfile: ./Dockerfile-1-12-fe
+    ports:
+      - "5000:5000"
+```
